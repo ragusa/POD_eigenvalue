@@ -1,0 +1,37 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+
+
+\begin{document}
+
+Eigenvalue problem
+\[
+A x = \lambda Bx
+\]
+where
+\[
+A = \sum_m 
+\begin{bmatrix}
+D_1^m K^m & 0\\
+0 & D_2^m K^m \\
+\end{bmatrix}
++
+\begin{bmatrix}
+\sigma_{r,1}^m M^m & 0\\
+-\sigma_{s,1\to2}^m M^m & \sigma_{r,2}^m M^m \\
+\end{bmatrix}
+\]
+and
+\[
+B = \sum_m 
+\begin{bmatrix}
+\nu\sigma_{f,1}^m M^m & \nu\sigma_{f,2}^m M^m \\
+0 & 
+\end{bmatrix}
+\]
+with $K^m$ and $M^m$ the stifness and mass matrices in each material zome $m$.
+\end{document}
