@@ -32,7 +32,7 @@ Four files are included:
 
 Given a set of material properties, the matrices for full system are assembled using region-dependent elementary matrices, as follows:  
 
-<img src="assembly.png" alt="drawing" width="500"/>
+<img src="mat_assembly.png" alt="drawing" width="500"/>
 
 
 2. ```generate_snapshots_lhs.m```
