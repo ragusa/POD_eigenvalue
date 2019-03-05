@@ -20,7 +20,7 @@ More details can be found in the following paper <span style="color:blue">Add re
 For our test case, we use the 3D LWR core benchmark data found in the Argonne benchmark problem book:
 R. R. Lee, D. A. Maneley, B. Micheelsen, D. R. Vondy, M. R. Wagner, W. Werner, Multi-dimensional (x-y-z) LWR Model, ANL-7416 supplement 2, benchmark problem 11, Argonne National Laboratory, Illinois, USA (1977).  
 
-<img src="core.png" alt="drawing" width="500"/>
+<img src="core.PNG" alt="drawing" width="500"/>
 
 A finite-element model of the problem has been built using the open-source FEM library [deal.ii](https://www.dealii.org), version 9.0.1.
 
