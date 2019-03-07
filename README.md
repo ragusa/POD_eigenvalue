@@ -8,13 +8,13 @@ Two Reduced-Order Models (ROM) are considered. Both of them use snapshopts (mult
 *  the first ROM (ROM-1) performs an SVD decomposition on the full snapshot matrix
 *  the second ROM (ROM-2) performs two SVD decompositions, one per energy group but using exactly the same snapshots as ROM-1
 
-Then, both ROMs perform a Galerkin projection to obtained the reduced eigenvalue problem.
+Then, both ROMs perform a Galerkin projection to obtain the reduced eigenvalue problem.
 
 The reduced eigenproblem of ROM-1 often has large errors when compared to the Full-Order Model (FOM) solution. ROM-1 never exhibits such errors. To further analyze this, we decided 
 * to never truncate the ROMS (that is the ROM rank is always equal to the number of snapshots used)
 * to test the ROMs on the training set (expecting machine precision errors only).
  
-More details can be found in the following paper <span style="color:blue">Add reference when published</span>.
+More details can be found in the following paper ```Add reference when published```.
 
 ## Provided test case
 For our test case, we use the 3D LWR core benchmark data found in the Argonne benchmark problem book:
@@ -37,18 +37,18 @@ Given a set of material properties, the matrices for full system are assembled u
 
 2. ```generate_snapshots_lhs.m```
 
-Varies the nominal parameters; samples them using Latin Hypercube; generate as many snapshots are requested and save them in a file.
+Varies the nominal parameters; samples them using Latin Hypercube; generate as many snapshots are requested and saves them in a file.
 
 Four series of snapshots are provided if you do not want to re-generate them.
 
 
 3. ```pod_test_anucen.m```
 
-For a given training data point (i.e., a set of material properties used to generate the FOM snapshot), compute the ROM-1 and ROM-2
+For a given training data point (i.e., a set of material properties used to generate the FOM snapshot), compute the ROM-1 and ROM-2 eigenvalues and compare them to the FOM eigenvalue. 
  
 4. ```pod_check_driver.m```
 
-Driver to go through of all the training data point and compare FOM, ROM-1, and ROM-2.
+Driver to go through of all the training data points and compare FOM, ROM-1, and ROM-2.
 
 ## License
 GNU GPLv3
