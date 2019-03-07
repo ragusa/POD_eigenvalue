@@ -1,5 +1,5 @@
 function failed = pod_test_anucen(snapshot_file,my_index)
-close all; 
+close all;
 
 if nargin==0 || nargin>2
     error('One or two arguments must be specified');
@@ -18,7 +18,7 @@ solve_nominal_eigenproblem = false;
 % T/F: whether to plot the singular values
 plot_singular_values = false;
 
-% loads: 
+% loads:
 %    m: number of materials
 %    n: number of unknowns (all groups)
 %    nnz_: number of nonzeros in the final group-wise matrix
@@ -27,9 +27,10 @@ plot_singular_values = false;
 %    S: stiffmess matrix per unit cross section, per material (m matrices)
 %    S: stiffmess matrix per unit cross section, per material (m matrices)
 load FEM_matrices.mat;
+% load FEM_matrices_ref1.mat;
 
-% loads: 
-%    xs: bechmark cross section (nominal values)
+% loads:
+%    xs: benchmark cross section (nominal values)
 load nominal_xs.mat
 
 %% compute Keff at the becnhmark nominal value (as a sanity check)
@@ -51,12 +52,18 @@ if plot_singular_values
     semilogy(sort(diag(L),'descend'),'+-'); hold all;
 end
 
-%% pick one training set xs for testing 
+%% pick one training set xs for testing
 % build single system matrix for the selected xs database
-[A,B]=build_full_system_matrix(m,n,nnz_,R,M,S,db{my_index});
-
+xs=db{my_index};
+[A,B]=build_full_system_matrix(m,n,nnz_,R,M,S,xs);
+for imat=1:length(xs)
+    if(xs{imat}.sigr(1)<xs{imat}.sigs)
+        fprintf('\nTraining data point: %d\n',my_index);
+        fprintf('material %d, sigr1 %d, sigs %d, %d\n',imat,xs{imat}.sigr(1),xs{imat}.sigs,abs(xs{imat}.sigr(1)-xs{imat}.sigs)/max(xs{imat}.sigr(1),xs{imat}.sigs));
+    end
+end
 %% ROM using full MG modes
-% U from eigpb             
+% U from eigpb
 Ar = U'*A*U;
 Br = U'*B*U;
 [ev_mg1,val_mg1]=eig(Br,Ar);
