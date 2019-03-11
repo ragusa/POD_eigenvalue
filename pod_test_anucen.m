@@ -47,6 +47,8 @@ n_snapshots = length(lambda);
 
 %% compute POD modes using multigroup snapshots
 [U,L,V]=svd(eigenvect,0);
+% [Ua,La,Va]=svd(Aeigenvect,0);
+Ua=Aeigenvect*V*inv(L);
 if plot_singular_values
     figure;
     semilogy(sort(diag(L),'descend'),'+-'); hold all;
@@ -70,14 +72,23 @@ Br = U'*B*U;
 keff_mg1=max(diag(val_mg1));
 % diag(val_mg1)
 % sort(abs(diag(val_mg1)));
-c=U'*eigenvect(:,my_index);
+% c=U'*eigenvect(:,my_index);
 % for k=1:10
 %     ev_mg1(:,k)./c
 % end
+Ar = Ua'*A*U;
+Br = Ua'*B*U;
+[ev_mg1a,val_mg1a]=eig(Br,Ar);
+keff_mg1a=max(diag(val_mg1a));
 
 %% compute group-wise POD modes using multigroup snapshots
 [U1,L1,V1]=svd(eigenvect(1:n    ,:),0);
 [U2,L2,V2]=svd(eigenvect(n+1:2*n,:),0);
+[U1a,L1a,V1a]=svd(Aeigenvect(1:n    ,:),0);
+[U2a,L2a,V2a]=svd(Aeigenvect(n+1:2*n,:),0);
+Ua1=Aeigenvect(1:n,:)*V1*inv(L1);
+Ua2=Aeigenvect(n+1:2*n,:)*V2*inv(L2);
+
 if plot_singular_values
     semilogy(sort(diag(L1),'descend'),'o-');
     semilogy(sort(diag(L2),'descend'),'x-');
@@ -91,6 +102,11 @@ Br = U'*B*U;
 keff_mg2=max(diag(val_mg2));
 % diag(val_mg2)
 % sort(abs(diag(val_mg2)));
+Ua=[U1a zeros(size(U1a)); zeros(size(U2a)) U2a];
+Ar = Ua'*A*U;
+Br = Ua'*B*U;
+[ev_mg2a,val_mg2a]=eig(Br,Ar);
+keff_mg2a=max(diag(val_mg2a));
 
 %% summary
 fprintf('\nTraining data point: %d\n',my_index);
@@ -101,7 +117,17 @@ fprintf('ROM-1 Keff = %g\n',keff_mg1);
 delta=(keff_mg1-lambda(my_index))*1e5;
 fprintf('  Delta(pcm) = %g',delta);
 if abs(delta)>10
-    fprintf('=====Error is too large=====\n');
+    fprintf('=====Error is too large===== ROM-1\n');
+    failed(1)=my_index;
+else
+    fprintf('\n');
+end
+
+fprintf('aROM-1 Keff = %g\n',keff_mg1a);
+delta=(keff_mg1a-lambda(my_index))*1e5;
+fprintf('  Delta(pcm) = %g',delta);
+if abs(delta)>10
+    fprintf('=====Error is too large===== aROM-1\n');
     failed(1)=my_index;
 else
     fprintf('\n');
@@ -111,7 +137,17 @@ fprintf('ROM-2 Keff = %g\n',keff_mg2);
 delta=(keff_mg2-lambda(my_index))*1e5;
 fprintf('  Delta(pcm) = %g',delta);
 if abs(delta)>10
-    fprintf('=====Error is too large=====\n');
+    fprintf('=====Error is too large===== ROM-2\n');
+    failed(2)=my_index;
+else
+    fprintf('\n');
+end
+
+fprintf('aROM-2 Keff = %g\n',keff_mg2a);
+delta=(keff_mg2a-lambda(my_index))*1e5;
+fprintf('  Delta(pcm) = %g',delta);
+if abs(delta)>10
+    fprintf('=====Error is too large===== aROM-2\n');
     failed(2)=my_index;
 else
     fprintf('\n');

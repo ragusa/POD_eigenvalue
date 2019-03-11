@@ -2,6 +2,7 @@ clear variables; clc; close all;
 
 %%
 snapshot_file='10snapshots_03_06_2019.mat';
+snapshot_file='ad10';
 fails=cell(2,1);
 for i=1:10
     failed=pod_test_anucen(snapshot_file,i);
@@ -27,6 +28,7 @@ pause
 
 %%
 snapshot_file='20snapshots_03_06_2019.mat';
+snapshot_file='ad20';
 fails=cell(2,1);
 for i=1:20
     failed=pod_test_anucen(snapshot_file,i);
@@ -52,6 +54,7 @@ pause
 
 %%
 snapshot_file='50snapshots_03_06_2019.mat';
+snapshot_file='ad50';
 fails=cell(2,1);
 for i=1:50
     failed=pod_test_anucen(snapshot_file,i);
@@ -77,6 +80,7 @@ pause
 
 %%
 snapshot_file='100snapshots_03_06_2019.mat';
+snapshot_file='ad100';
 fails=cell(2,1);
 for i=1:100
     failed=pod_test_anucen(snapshot_file,i);

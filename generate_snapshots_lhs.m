@@ -35,6 +35,8 @@ load nominal_xs.mat
 % allocate memory
 eigenvect=zeros(2*n,n_snapshots);
 lambda=zeros(n_snapshots,1);
+Aeigenvect=zeros(2*n,n_snapshots);
+Alambda=zeros(n_snapshots,1);
 
 % prepare pertubations
 frac_pert = 0.2; % 20% perturbation for each nominal value
@@ -87,12 +89,15 @@ for i=1:n_snapshots
     [A,B]=build_full_system_matrix(m,n,nnz_,R,M,S,xs);
     [eigenvect(:,i),lambda(i)]=eigs(B,A,1); % ,'LM',opts);
     fprintf('Snapshot %d/%d: Keff=%g\n',i,n_snapshots,lambda(i));
+    % compute the adjoint snapshot
+    [Aeigenvect(:,i),Alambda(i)]=eigs(B.',A.',1); % ,'LM',opts);
+    fprintf(' Adjoint %d/%d: Keff=%g\n',i,n_snapshots,Alambda(i));
     % save the xs database for reproductibility of the results
     db{i}=xs;
 end
 
 % save snapshot values
-save(filename,'eigenvect','lambda','db');
+save(filename,'eigenvect','lambda','Aeigenvect','Alambda','db');
 
 return
 end
