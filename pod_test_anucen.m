@@ -106,6 +106,7 @@ if abs(delta)>10
 else
     fprintf('\n');
 end
+delta_mono=delta;
 
 fprintf('ROM-2 Keff = %g\n',keff_mg2);
 delta=(keff_mg2-lambda(my_index))*1e5;
@@ -116,6 +117,9 @@ if abs(delta)>10
 else
     fprintf('\n');
 end
+delta_gw=delta;
+
+% fprintf('%d %s %3.1f %s %3.1f %s \n',my_index,' & ', delta_gw,' & ',delta_mono,' \\ ');
 
 return
 end

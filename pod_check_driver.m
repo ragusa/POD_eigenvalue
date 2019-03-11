@@ -10,14 +10,14 @@ for i=1:10
 end
 fprintf('Training points that did not pass the test for Monolithic ROM:\n');
 if length(fails{1})>0
-    fprintf('%d ',fails{1});
+    fprintf(' === sum = %d\n',length(fails{1}));
     fprintf('\n');
 else
     fprintf('None\n');
 end
 fprintf('Training points that did not pass the test for Group-wise ROM:\n');
 if length(fails{2})>0
-    fprintf('%d ',fails{2});
+    fprintf(' === sum = %d\n',length(fails{2}));
     fprintf('\n');
 else
     fprintf('None\n');
@@ -35,7 +35,7 @@ for i=1:20
 end
 fprintf('Training points that did not pass the test for Monolithic ROM:\n');
 if length(fails{1})>0
-    fprintf('%d ',fails{1});
+    fprintf(' === sum = %d\n',length(fails{1}));
     fprintf('\n');
 else
     fprintf('None\n');
@@ -43,7 +43,7 @@ end
 fprintf('Training points that did not pass the test for Group-wise ROM:\n');
 if length(fails{2})>0
     fprintf('%d ',fails{2});
-    fprintf('\n');
+    fprintf(' === sum = %d\n',length(fails{2}));
 else
     fprintf('None\n');
 end
@@ -60,14 +60,14 @@ for i=1:50
 end
 fprintf('Training points that did not pass the test for Monolithic ROM:\n');
 if length(fails{1})>0
-    fprintf('%d ',fails{1});
+    fprintf(' === sum = %d\n',length(fails{1}));
     fprintf('\n');
 else
     fprintf('None\n');
 end
 fprintf('Training points that did not pass the test for Group-wise ROM:\n');
 if length(fails{2})>0
-    fprintf('%d ',fails{2});
+    fprintf(' === sum = %d\n',length(fails{2}));
     fprintf('\n');
 else
     fprintf('None\n');
@@ -85,14 +85,14 @@ for i=1:100
 end
 fprintf('Training points that did not pass the test for Monolithic ROM:\n');
 if length(fails{1})>0
-    fprintf('%d ',fails{1});
+    fprintf(' === sum = %d\n',length(fails{1}));
     fprintf('\n');
 else
     fprintf('None\n');
 end
 fprintf('Training points that did not pass the test for Group-wise ROM:\n');
 if length(fails{2})>0
-    fprintf('%d ',fails{2});
+    fprintf(' === sum = %d\n',length(fails{2}));
     fprintf('\n');
 else
     fprintf('None\n');
