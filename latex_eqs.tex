@@ -34,4 +34,171 @@ B = \sum_m
 \end{bmatrix}
 \]
 with $K^m$ and $M^m$ the stiffness and mass matrices in each material zone $m$.
+
+\bigskip
+
+Solution expansion for monolithic ROM
+\[
+\Phi = 
+c_1 
+\begin{bmatrix}
+u^1_1 \\
+\vdots \\
+u^1_g \\
+\vdots \\
+u^1_G 
+\end{bmatrix}
++ 
+c_2 
+\begin{bmatrix}
+u^2_1 \\
+\vdots \\
+u^2_g \\
+\vdots \\
+u^2_G 
+\end{bmatrix}
++ 
+\ldots
++
+c_r 
+\begin{bmatrix}
+u^r_1 \\
+\vdots \\
+u^r_g \\
+\vdots \\
+u^r_G 
+\end{bmatrix}
+\]
+
+Two-group reduced eigenvalue problem for monolithic ROM
+\[
+\begin{bmatrix}
+U^T_1 A_{11} U_1 +  U^T_1 A_{12} U_2 +
+U^T_2 A_{21} U_1 +  U^T_2 A_{22} U_2 
+\end{bmatrix}
+\begin{bmatrix}
+c
+\end{bmatrix}
+=
+\frac{1}{k}
+\begin{bmatrix}
+U^T_1 B_{11} U_1 +  U^T_1 B_{12} U_2 +
+U^T_2 B_{21} U_1 +  U^T_2 B_{22} U_2 
+\end{bmatrix}
+\]
+
+Two-group reduced fixed-source problem for monolithic ROM
+\[
+\begin{bmatrix}
+U^T_1 A_{11} U_1 +  U^T_1 A_{12} U_2 +
+U^T_2 A_{21} U_1 +  U^T_2 A_{22} U_2 
+\end{bmatrix}
+\begin{bmatrix}
+c
+\end{bmatrix}
+=
+\begin{bmatrix}
+U^T_1 b_1 + U^T_2 b_2
+\end{bmatrix}
+\]
+
+
+
+Two-group reduced eigenvalue problem for group-wise ROM
+\[
+\begin{bmatrix}
+U^T_1 A_{11} U_1 &  U^T_1 A_{12} U_2 \\
+U^T_2 A_{21} U_1 &  U^T_2 A_{22} U_2 \\
+\end{bmatrix}
+\begin{bmatrix}
+c_1\\c_2
+\end{bmatrix}
+=
+\frac{1}{k}
+\begin{bmatrix}
+U^T_1 B_{11} U_1 &  U^T_1 B_{12} U_2 \\
+U^T_2 B_{21} U_1 &  U^T_2 B_{22} U_2 \\
+\end{bmatrix}
+\begin{bmatrix}
+c_1\\c_2
+\end{bmatrix}
+\]
+Two-group reduced fixed-source problem for group-wise ROM
+\[
+\begin{bmatrix}
+U^T_1 A_{11} U_1 &  U^T_1 A_{12} U_2 \\
+U^T_2 A_{21} U_1 &  U^T_2 A_{22} U_2 \\
+\end{bmatrix}
+\begin{bmatrix}
+c_1\\c_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+U^T_1 b_1\\ U^T_2 b_2
+\end{bmatrix}
+\]
+
+
+
+\bigskip
+
+Solution expansion for group-wise ROM
+\[
+\Phi = 
+\begin{bmatrix}
+c^1_1 u^1_1 \\
+\vdots \\
+c^1_g u^1_g \\
+\vdots \\
+c^1_G u^1_G 
+\end{bmatrix}
++ 
+\begin{bmatrix}
+c^2_1 u^2_1 \\
+\vdots \\
+c^2_g u^2_g \\
+\vdots \\
+c^2_G u^2_G 
+\end{bmatrix}
++ 
+\ldots
++
+\begin{bmatrix}
+c^r_1 u^r_1 \\
+\vdots \\
+c^r_g u^r_g \\
+\vdots \\
+c^r_G u^r_G 
+\end{bmatrix}
+\]
+
+
+Source-driven problem
+\[
+A x = Q
+\]
+where
+\[
+A = \sum_m 
+\begin{bmatrix}
+D_1^m K^m & 0\\
+0 & D_2^m K^m \\
+\end{bmatrix}
++
+\begin{bmatrix}
+\sigma_{r,1}^m M^m & 0\\
+-\sigma_{s,1\to2}^m M^m & \sigma_{r,2}^m M^m \\
+\end{bmatrix}
+\]
+and
+\[
+Q = \sum_m 
+\begin{bmatrix}
+Q^m F^m \\
+0 
+\end{bmatrix}
+\]
+with $F^m$ load vector in each material zone $m$.
+
+
 \end{document}
