@@ -64,6 +64,12 @@ for imat=1:length(xs)
 end
 %% ROM using full MG modes
 % U from eigpb
+% commenthing out these lines does change the answer
+% so, for eigenvalue problems, one should not use U as is (hence one should
+% not be solving a group-collapsed ROM) because this will lead to erroneous answers.
+% % U1=U(1:n,:);
+% % U2=U(n+1:2*n,:);
+% % U=[U1 zeros(size(U1)); zeros(size(U2)) U2];
 Ar = U'*A*U;
 Br = U'*B*U;
 [ev_mg1,val_mg1]=eig(Br,Ar);
