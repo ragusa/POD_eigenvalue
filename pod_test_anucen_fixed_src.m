@@ -52,13 +52,13 @@ for imat=1:length(xs)
         fprintf('material %d, sigr1 %d, sigs %d, %d\n',imat,xs{imat}.sigr(1),xs{imat}.sigs,abs(xs{imat}.sigr(1)-xs{imat}.sigs)/max(xs{imat}.sigr(1),xs{imat}.sigs));
     end
 end
-%% ROM using full MG modes
-% uncommenthing these lines does not change the answer
+%% ROM expansion using full MG modes
+% uncommenting these lines does not change the answer
 % so, for fixed source problem, one can use U as is and solve a
 % group-collapsed ROM
-% U1=U(1:n,:);                                     
-% U2=U(n+1:2*n,:);                                 
-% U=[U1 zeros(size(U1)); zeros(size(U2)) U2];      
+% U1=U(1:n,:);
+% U2=U(n+1:2*n,:);
+% U=[U1 zeros(size(U1)); zeros(size(U2)) U2];
 Ar = U'*A*U;
 br = U'*b;
 xr1=Ar\br;
@@ -73,7 +73,7 @@ if plot_singular_values
     semilogy(sort(diag(L2),'descend'),'x-');
 end
 
-%% ROM per group
+%% ROM expansion using different expansion coefficients per group
 U=[U1 zeros(size(U1)); zeros(size(U2)) U2];
 Ar = U'*A*U;
 br = U'*b;
@@ -88,29 +88,28 @@ mm=1000;
 fprintf('FOM   Val = %g\n',sol(mm,my_index));
 
 fprintf('ROM-1 Val = %g\n',x1(mm));
-delta=norm(x1-sol(:,my_index));
-fprintf('  Delta = %g',delta);
-if abs(delta)>1e-4
+error_norm=norm(x1-sol(:,my_index));
+fprintf('  error_norm = %g',error_norm);
+if abs(error_norm)>1e-4
     fprintf('=====Error is too large=====\n');
     failed(1)=my_index;
 else
     fprintf('\n');
 end
-delta_mono=delta;
+error_norm_mono=error_norm;
 
 fprintf('ROM-2 Val = %g\n',x2(mm));
-delta=norm(x1-sol(:,my_index));
-fprintf('  Delta = %g',delta);
-if abs(delta)>1e-4
+error_norm=norm(x1-sol(:,my_index));
+fprintf('  error_norm = %g',error_norm);
+if abs(error_norm)>1e-4
     fprintf('=====Error is too large=====\n');
     failed(2)=my_index;
 else
     fprintf('\n');
 end
-delta_gw=delta;
+error_norm_gw=error_norm;
 
-% fprintf('%d %s %3.1f %s %3.1f %s \n',my_index,' & ', delta_gw,' & ',delta_mono,' \\ ');
+% fprintf('%d %s %3.1f %s %3.1f %s \n',my_index,' & ', error_norm_gw,' & ',error_norm_mono,' \\ ');
 
 return
 end
-
