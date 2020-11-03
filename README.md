@@ -19,7 +19,7 @@ The reduced eigenproblem of ROM-1 often has large errors when compared to the Fu
 * to never truncate the ROMS (that is the ROM rank is always equal to the number of snapshots used)
 * to test the ROMs on the training set (expecting machine precision errors only).
 
-More details can be found in the following paper ```Add reference to ANUCENE paper when published```.
+More details can be found in the following paper By German and Ragusa: [Reduced-order modeling of parameterized multi-group diffusion k-eigenvalue problems](https://doi.org/10.1016/j.anucene.2019.05.049).
 
 ## Provided test case
 
